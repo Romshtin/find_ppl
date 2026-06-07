@@ -1,0 +1,33 @@
+# Секреты и сессии — никогда не коммитим
+.env
+*.session
+*.session-journal
+data/vk_user_token.txt
+data/vk_app_secret.txt
+data/vk_session.json
+data/.vk_refresh.lock
+
+# Архивы Telegram-разведки
+data/telegram_harvest/raw/
+data/telegram_harvest/filtered/
+data/telegram_harvest/.seen.json
+
+# Архивы VK-разведки
+data/vk_harvest/raw/
+data/vk_harvest/filtered/
+data/vk_harvest/.seen.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+
+# Кастомные скиллы — НЕ игнорируем (это пользовательские данные, не секреты)
+# Но runtime-артефакты скиллов игнорируем
+.claude/skills/*/runtime/
+.claude/skills/*/logs/
+
+# Playwright MCP — runtime-кеш (console-*.log, page-*.yml), пересоздаётся автоматически
+.playwright-mcp/
