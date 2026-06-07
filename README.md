@@ -1,6 +1,6 @@
 # find_ppl
 
-Разведывательный скилл для Claude Code: собирает посты и комменты из Telegram и VK, фильтрует по взвешенным маркерам и складывает в JSON-архив, пригодный для ручного разбора в Obsidian.
+Разведывательный скилл для Claude Code: собирает посты и комменты из Telegram и VK, фильтрует по взвешенным маркерам и складывает в JSON-архив, пригодный для ручного разбора в Zed.
 
 Идея — поиск 1–2 человек для редких встреч «без ролей, без масок» (концепция из «Индивидуальных отношений» А. Курпатова). Реализация — пайплайн `harvest → filter → flat archive`.
 
@@ -129,6 +129,12 @@ powershell -ExecutionPolicy Bypass -File "C:\Users\<user>\.claude\skills\find_pp
 /find_ppl both         # telegram + vk
 ```
 
+![Запуск find_ppl из Claude Code](images/find_ppl_skill_invocation.png)
+
+### Результат после запуска skill в Claude Code
+
+![Сводка после harvest](images/find_ppl_harvest_summary.png)
+
 ### Напрямую Python-модулем
 
 ```bash
@@ -153,7 +159,7 @@ data/vk_harvest/
   filtered/
 ```
 
-Формат `filtered/*.json` (компактный, читается в Obsidian без скролла):
+Формат `filtered/*.json` (компактный, читается в Zed с подсветкой и сворачиваемыми секциями):
 
 ```jsonc
 {
@@ -164,6 +170,8 @@ data/vk_harvest/
   ]
 }
 ```
+
+![Отфильтрованный архив в Zed](images/find_ppl_filtered_archive.png)
 
 - `author_url` = реальная ссылка на автора, **или** строка `"Группа"`
   (пост от канала), **или** пусто (пост из хештега, отсеян до попадания
