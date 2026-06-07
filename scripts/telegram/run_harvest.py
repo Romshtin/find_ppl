@@ -22,10 +22,10 @@ from scripts.common.markers import load_strategy
 # раздел «📡 Канал Telegram — не пройден». Используется, если стратегия не задана.
 # 2026-06-04: gestalt_msk_chat / gestalt_chat / gestalt_community удалены —
 # не прошли верификацию через client.get_entity (см. память findppl-verify-tg-username).
+# 2026-06-07: O_soznay и pcap_jung удалены — 0 записей после фильтра,
+# не дают вклада (см. CLAUDE.md, раздел «Открытые вопросы»).
 DEFAULT_CHANNELS = [
     "empathy_rus",          # «Канал для эмпатов об эмпатах»
-    "O_soznay",             # «Мастерская осознанности», 14 676 подп.
-    "pcap_jung",            # Юнгианский канал
     "senseofcalmness",      # Психолог, саногенное мышление
     "empatiaclub",          # Эзотерический уклон, но проверить
 ]
