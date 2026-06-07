@@ -1,0 +1,41 @@
+{
+  "_comment": "Стратегия разведки по Курпатову — поиск людей для индивидуальных отношений.",
+  "channels": [
+    "empathy_rus",
+    "O_soznay",
+    "pcap_jung",
+    "senseofcalmness"
+  ],
+  "vk_groups": [
+    "gestalt_program",
+    "gestalt_video",
+    "gestalt.today",
+    "belousova_mindfulness",
+    "jungterra",
+    "jung_analiz",
+    "philopsikheya"
+  ],
+  "markers": [
+    { "pattern": "\\bбез\\s+рол",                 "weight": 3 },
+    { "pattern": "\\bбез\\s+маск",                "weight": 3 },
+    { "pattern": "\\bмаск[аиуы]?\\b",             "weight": 1 },
+    { "pattern": "\\bприсутств",                  "weight": 2 },
+    { "pattern": "\\bэмпати",                     "weight": 1 },
+    { "pattern": "\\bодиночеств\\w*\\s+(среди|внутри|между)", "weight": 2 },
+    { "pattern": "\\bнастоящ\\w+\\s+я",           "weight": 2 },
+    { "pattern": "\\bсущност",                    "weight": 2 },
+    { "pattern": "\\bпаттерн",                    "weight": 1 },
+    { "pattern": "\\bКурпатов",                   "weight": 3 },
+    { "pattern": "\\bэкзистенциал",               "weight": 2 },
+    { "pattern": "\\bфеноменолог",                "weight": 2 },
+    { "pattern": "\\bгештальт",                   "weight": 1 },
+    { "pattern": "\\bхеллингер",                  "weight": 1 },
+    { "pattern": "\\bвзаимн\\w+\\s+присутств",   "weight": 3 },
+    { "pattern": "\\bувидеть\\s+настоящ",         "weight": 3 },
+    { "pattern": "\\bролев\\w+\\s+общен",        "weight": 2 },
+    { "pattern": "\\bсущностн\\w+\\s+контакт",   "weight": 3 },
+    { "pattern": "\\bиндивидуальн\\w+\\s+отношен", "weight": 3 }
+  ],
+  "min_score": 1,
+  "output_subdir": "individual_rel"
+}
