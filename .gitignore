@@ -7,6 +7,9 @@ data/vk_app_secret.txt
 data/vk_session.json
 data/.vk_refresh.lock
 
+# Сырой список прокси (локально, не в репо)
+data/proxies_raw.txt
+
 # Архивы Telegram-разведки
 data/telegram_harvest/raw/
 data/telegram_harvest/filtered/
@@ -31,3 +34,17 @@ __pycache__/
 
 # Playwright MCP — runtime-кеш (console-*.log, page-*.yml), пересоздаётся автоматически
 .playwright-mcp/
+
+# Claude Code — локальные настройки и диагностика (НЕ часть проекта)
+# settings.local.json палит абсолютные пути пользователя,
+# fix_vk_bom.py / find_ppl_smoke_test.py — одноразовые диагностические скрипты
+.claude/
+
+# Методологические исходники (Курпатов) — НЕ в репо, держим локально
+Главные\ вопросы\ жизни.\ Универсальные\ правила.md
+Индивидуальные\ отношения.\ Теория\ и\ практика\ эмпатии.md
+Развитие\ личности.\ Психология\ и\ психотерапия.md
+
+# Obsidian случайно открыл filtered/ как vault — не коммитим служебную мета
+data/telegram_harvest/filtered/.obsidian/
+data/vk_harvest/filtered/.obsidian/
