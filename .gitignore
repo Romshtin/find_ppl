@@ -45,6 +45,12 @@ __pycache__/
 Индивидуальные\ отношения.\ Теория\ и\ практика\ эмпатии.md
 Развитие\ личности.\ Психология\ и\ психотерапия.md
 
+# Шорт-лист кандидатов — PII, удалён из истории 2026-06-10 (filter-repo).
+# Любые похожие файлы с шаблоном candidates-shortlist.md — тоже в игноре,
+# чтобы случайно не закоммитить.
+*-candidates-shortlist.md
+candidates-shortlist.md
+
 # Obsidian случайно открыл filtered/ как vault — не коммитим служебную мета
 data/telegram_harvest/filtered/.obsidian/
 data/vk_harvest/filtered/.obsidian/
