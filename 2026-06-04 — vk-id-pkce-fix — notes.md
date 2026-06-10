@@ -51,7 +51,7 @@ GET https://id.vk.com/authorize?client_id=54622669&response_type=code&...
 ### Дополнительно
 
 - `data/vk_user_token.txt` — протух (`access_token has expired`, error 5)
-- `data/vk_app_secret.txt` — `lLs6C3kQ…b5Cu (20 символов)` (20 символов, валидный)
+- `data/vk_app_secret.txt` — `lLs6C3kQ…b5Cu` (20 символов, валидный)
 - `data/vk_session.json` — отсутствует (ещё не создавали)
 
 ---
