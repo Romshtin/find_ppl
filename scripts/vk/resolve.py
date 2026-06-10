@@ -158,7 +158,9 @@ def resolve_all() -> None:
     for src in sources:
         try:
             n = _resolve_file(src)
-        except Exception as e:  # noqa: BLE001
+        except (OSError, ValueError, KeyError) as e:
+            # Битый JSON / смена формата / сеть — лог + пропуск файла,
+            # остальные источники продолжают работу.
             print(f"[ERR] {src.name}: {e.__class__.__name__}: {e}")
             continue
         if n:

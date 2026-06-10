@@ -73,4 +73,4 @@ finally {
 }
 
 Write-Host ""
-Write-Host "[DONE] Готово. Результаты: data\vk_harvest\filtered\\" -ForegroundColor Green
+Write-Host "[DONE] Готово. Результаты: data\vk_harvest\filtered\" -ForegroundColor Green

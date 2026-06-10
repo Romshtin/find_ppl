@@ -10,6 +10,13 @@ import sys
 from pathlib import Path
 
 from telethon import TelegramClient
+from telethon.errors import (
+    ApiIdInvalidError,
+    AuthKeyError,
+    ConnectionApiIdInvalidError,
+    RpcCallFailError,
+)
+from telethon.errors.rpcerrorlist import UnauthorizedError
 from telethon.network.connection.tcpmtproxy import ConnectionTcpMTProxyAbridged
 
 # Глобальный клиент не нужен, создаём свой для каждого прокси.
@@ -48,12 +55,21 @@ async def test_one(host: str, port: int, secret: str, timeout: float = 8.0) -> b
     except (asyncio.TimeoutError, ConnectionError, OSError) as e:
         print(f"    [FAIL] {type(e).__name__}: {str(e)[:100]}")
         return False
-    except Exception as e:  # noqa: BLE001
-        # Если прошёл handshake, но упал на auth — это OK, прокси живой.
-        # Telethon выкидывает что-то типа "ApiIdInvalidError" — значит, прокси
-        # ответил и дошёл до стадии auth. Считаем успехом.
-        if "ApiId" in str(e) or "auth" in str(e).lower():
-            return True
+    except (
+        ApiIdInvalidError,
+        ConnectionApiIdInvalidError,
+        AuthKeyError,
+        UnauthorizedError,
+        RpcCallFailError,
+    ):
+        # Прошёл handshake и дошёл до стадии auth — прокси живой.
+        # С DUMMY api_id/hash Telegram ответит одним из этих классов;
+        # с реальным — попросит send_code, но до этого мы не доходим.
+        return True
+    except Exception as e:
+        # Всё, что не сетевая ошибка и не auth-ошибка — логируем подробно.
+        # Раньше здесь была хрупкая эвристика по подстроке в str(e), но
+        # текст ошибок Telethon не стабилен между версиями.
         print(f"    [FAIL] {type(e).__name__}: {str(e)[:100]}")
         return False
     finally:

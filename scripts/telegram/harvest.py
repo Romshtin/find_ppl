@@ -139,7 +139,8 @@ async def harvest_chat(
                         )
             except (ChatForbiddenError, ChatWriteForbiddenError) as e:
                 post["comments_error"] = f"access denied: {e.__class__.__name__}"
-            except Exception as e:  # noqa: BLE001
+            except (OSError, TimeoutError) as e:
+                # Сетевой сбой при загрузке комментов — пост всё равно сохранится
                 post["comments_error"] = f"{e.__class__.__name__}: {e}"
         posts.append(post)
         seen_post_ids.add(msg.id)

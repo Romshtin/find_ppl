@@ -3,7 +3,7 @@
 Использует общий модуль scripts/common/markers.py — ту же логику, что и
 Telegram: на выходе компактный JSON с entries[] = [{_score, author_url, text}],
 отсортированный (has_author_url desc, _score desc). Удобно читать
-в Obsidian построчно, без скрола вправо.
+в Zed построчно, без скрола вправо.
 """
 import json
 from pathlib import Path
@@ -12,8 +12,7 @@ from scripts.common.markers import (
     build_group_url,
     flatten_and_sort,
     load_strategy,
-    score_legacy,
-    score_weighted,
+    score_text,
 )
 
 from .config import FILTERED_DIR, RAW_DIR
@@ -23,22 +22,22 @@ def filter_archive(in_path: Path, out_path: Path, strategy: dict | None) -> int:
     """Отфильтровать один JSON VK-группы. Возвращает число оставшихся постов."""
     data = json.loads(in_path.read_text(encoding="utf-8"))
     min_score = strategy.get("min_score", 1) if strategy else 1
-    score_fn = score_weighted if strategy else score_legacy
-    hits_key = "_marker_hits_weighted" if strategy else "_marker_hits"
+
+    def _keep(record: dict) -> tuple[int, list, str] | None:
+        s, hits, hits_key = score_text(record["text"], strategy)
+        if s < min_score:
+            return None
+        record[hits_key] = hits
+        record["_score"] = s
+        return s
 
     kept_posts = []
     for post in data["posts"]:
-        s, hits = score_fn(post["text"], strategy) if strategy else score_legacy(post["text"])
-        if s < min_score:
+        if _keep(post) is None:
             continue
-        post[hits_key] = hits
-        post["_score"] = s
         kept_comments = []
         for c in post.get("comments", []):
-            cs, chits = score_fn(c["text"], strategy) if strategy else score_legacy(c["text"])
-            if cs >= min_score:
-                c[hits_key] = chits
-                c["_score"] = cs
+            if _keep(c) is not None:
                 kept_comments.append(c)
         post["comments"] = kept_comments
         kept_posts.append(post)

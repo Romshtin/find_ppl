@@ -233,3 +233,25 @@ def score_weighted(text: str, strategy: dict) -> tuple[int, list[dict]]:
             hits.append({"pattern": pattern.pattern, "weight": weight})
             total += weight
     return total, hits
+
+
+def score_text(
+    text: str, strategy: dict | None
+) -> tuple[int, list, str]:
+    """Единая точка входа для фильтров: и со стратегией, и без.
+
+    Возвращает (score, hits, hits_key) — последнее сразу подсказывает
+    имя поля, в которое фильтр запишет hits в JSON. Раньше фильтры
+    дублировали выбор score_fn/hits_key тернарником в двух местах
+    (для постов и для комментариев) и легко было рассинхронить.
+
+    Без стратегии score = число совпавших legacy-паттернов, hits —
+    list[str] с pattern'ами, hits_key = "_marker_hits".
+    Со стратегией — взвешенная сумма, hits = list[dict] {pattern, weight},
+    hits_key = "_marker_hits_weighted".
+    """
+    if strategy is not None:
+        s, h = score_weighted(text, strategy)
+        return s, h, "_marker_hits_weighted"
+    s, h = score_legacy(text)
+    return s, h, "_marker_hits"
