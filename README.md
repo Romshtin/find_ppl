@@ -89,8 +89,8 @@ filter → гашение моста. Подробности — в `skills/find
 
 | Компонент | Зачем | Где взять |
 |---|---|---|
-| **VPS с Shadowsocks-сервером** | Мост `ss-local.exe → VPS:8388` для обхода блокировки Telegram | Свой VPS (Hetzner/OVH/…). Поднять `shadowsocks-rust` или `shadowsocks-libev` на UDP-порту |
-| **`ss-local.exe`** | Локальный SOCKS5-мост на `127.0.0.1:1080` | Бинарь Shadowsocks-клиента под Windows: [shadowsocks/shadowsocks-windows](https://github.com/shadowsocks/shadowsocks-windows) (архивные релизы) или `shadowsocks-rust` |
+| **VPS с Shadowsocks-сервером** | Мост `ss-local.exe → VPS:$8388$` для обхода блокировки Telegram | Свой VPS (Hetzner/OVH/…). Поднять `shadowsocks-rust` или `shadowsocks-libev` на UDP-порту |
+| **`ss-local.exe`** | Локальный SOCKS5-мост на `127.0.0.1:$1080$` | Бинарь Shadowsocks-клиента под Windows: [shadowsocks/shadowsocks-windows](https://github.com/shadowsocks/shadowsocks-windows) (архивные релизы) или `shadowsocks-rust` |
 | **`ss-config.json`** | Конфиг моста с адресом VPS и паролем | Сгенерировать по документации Shadowsocks, положить рядом с `sslocal.exe` |
 | **`TG_API_ID` / `TG_API_HASH`** | Идентификатор приложения Telegram | [my.telegram.org](https://my.telegram.org) → «API development tools» → создать приложение |
 | **`TG_SESSION_NAME`** (опц.) | Имя `.session`-файла Telethon. По умолчанию `findppl_session` | — |
@@ -233,7 +233,7 @@ data/vk_harvest/
 - **VK:** `requests` + `python-dotenv`. Авторизация — PKCE-flow VK ID SDK
   с автообновлением по `refresh_token`.
 - **Мост:** [shadowsocks-rust](https://github.com/shadowsocks/shadowsocks-rust)
-  (или `shadowsocks-libev`) как SOCKS5-сервер на `127.0.0.1:1080`.
+  (или `shadowsocks-libev`) как SOCKS5-сервер на `127.0.0.1:$1080$`.
 - **Skill runtime:** PowerShell 5.1 (Windows). UTF-8 BOM для `.ps1`
   обязателен.
 
